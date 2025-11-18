@@ -1,65 +1,75 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Menu } from "lucide-react";
+import { Bodoni_Moda } from "next/font/google";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { ThemeSwitch } from "@/components/custom/ThemeSwitch";
+
+const bodoni = Bodoni_Moda({ subsets: ["latin"], weight: ["900"] });
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="grid min-h-screen w-full grid-cols-4 bg-background">
+      <div className="fixed right-6 top-6 z-50 flex items-center gap-2 rounded-full backdrop-blur-sm px-2 py-1">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button aria-label="Open menu" className="h-6 w-6 text-black/80 dark:text-white/80">
+              <Menu className="h-6 w-6" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" sideOffset={8} className="mt-2">
+            <DropdownMenuItem asChild>
+              <Link href="/">Home</Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+              <Link href="/auth/login">Sign In</Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <ThemeSwitch />
+      </div>
+      <section className="relative h-screen border-r border-black/20">
+        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+          <span className={`${bodoni.className} text-black/90 leading-none tracking-tight text-[22vw]`}>S</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <span className="absolute bottom-4 left-6 text-xs tracking-widest text-black/80">01</span>
+      </section>
+
+      <section className="relative h-screen border-r border-black/20 overflow-hidden">
+        <Image src="/images/carousel2.jpg" alt="" fill className="object-cover" priority />
+        <div className="absolute inset-0 bg-[#d9b1b1]/70 mix-blend-multiply" />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="z-10 inline-block transform-gpu will-change-transform motion-safe:animate-[soul-ball-bounce_2.8s_cubic-bezier(0.33,0.66,0.66,1)_infinite]">
+            <span className={`${bodoni.className} text-white/90 rotate-[130deg] leading-none tracking-tight text-[22vw]`}>O</span>
+          </span>
         </div>
-      </main>
-    </div>
+        <span className="absolute bottom-4 left-6 text-xs tracking-widest text-white/80">02</span>
+      </section>
+
+      <section className="relative h-screen border-r border-black/20">
+        <div className="absolute inset-0 flex items-start justify-center pointer-events-none pt-30">
+          <span className={`${bodoni.className} text-black/90 leading-none tracking-tight text-[22vw]`}>U</span>
+        </div>
+        <div className="absolute left-1/2 top-[64%] w-[38%] -translate-x-1/2 text-xs text-black/80">
+          <p className="leading-relaxed">Futuristic Flow Shaped By Seamless Systems For Refined Precision</p>
+        </div>
+        <span className="absolute bottom-4 left-6 text-xs tracking-widest text-black/80">03</span>
+      </section>
+
+      <section className="relative h-screen">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className={`${bodoni.className} text-black/90 absolute bottom leading-none tracking-tight text-[22vw]`}>L</span>
+        </div>
+        <span className="absolute bottom-4 left-6 text-xs tracking-widest text-black/80">04</span>
+        <span className="absolute bottom-20 right-2 rotate-90 text-xs text-black/80">COPYRIGHT © 2025</span>
+      </section>
+    </main>
   );
 }
