@@ -1,3 +1,6 @@
+"use client";
+import { useEffect } from "react";
+import gsap from "gsap";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
@@ -14,6 +17,12 @@ import { ThemeSwitch } from "@/components/custom/ThemeSwitch";
 const bodoni = Bodoni_Moda({ subsets: ["latin"], weight: ["900"] });
 
 export default function Home() {
+  useEffect(() => {
+    const els = gsap.utils.toArray<HTMLElement>(".soul-letter");
+    gsap.set(els, { opacity: 0, y: 60 });
+    gsap.to(els, { opacity: 1, y: 0, stagger: 0.12, duration: 0.8, ease: "power4.out" });
+  }, []);
+
   return (
     <main className="grid min-h-screen w-full grid-cols-4 bg-background">
       <div className="fixed right-6 top-6 z-50 flex items-center gap-2 rounded-full backdrop-blur-sm px-2 py-1">
@@ -36,7 +45,7 @@ export default function Home() {
         <ThemeSwitch />
       </div>
       <section className="relative h-screen border-r border-black/20">
-        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+        <div className="soul-letter absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
           <span className={`${bodoni.className} text-black/90 leading-none tracking-tight text-[22vw]`}>S</span>
         </div>
         <span className="absolute bottom-4 left-6 text-xs tracking-widest text-black/80">01</span>
@@ -45,7 +54,7 @@ export default function Home() {
       <section className="relative h-screen border-r border-black/20 overflow-hidden">
         <Image src="/images/carousel2.jpg" alt="" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-[#d9b1b1]/70 mix-blend-multiply" />
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="soul-letter absolute inset-0 flex items-center justify-center pointer-events-none">
           <span className="z-10 inline-block transform-gpu will-change-transform motion-safe:animate-[soul-ball-bounce_2.8s_cubic-bezier(0.33,0.66,0.66,1)_infinite]">
             <span className={`${bodoni.className} text-white/90 rotate-[130deg] leading-none tracking-tight text-[22vw]`}>O</span>
           </span>
@@ -54,7 +63,7 @@ export default function Home() {
       </section>
 
       <section className="relative h-screen border-r border-black/20">
-        <div className="absolute inset-0 flex items-start justify-center pointer-events-none pt-30">
+        <div className="soul-letter absolute inset-0 flex items-start justify-center pointer-events-none pt-12">
           <span className={`${bodoni.className} text-black/90 leading-none tracking-tight text-[22vw]`}>U</span>
         </div>
         <div className="absolute left-1/2 top-[64%] w-[38%] -translate-x-1/2 text-xs text-black/80">
@@ -64,7 +73,7 @@ export default function Home() {
       </section>
 
       <section className="relative h-screen">
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="soul-letter absolute inset-0 flex items-center justify-center pointer-events-none">
           <span className={`${bodoni.className} text-black/90 absolute bottom leading-none tracking-tight text-[22vw]`}>L</span>
         </div>
         <span className="absolute bottom-4 left-6 text-xs tracking-widest text-black/80">04</span>

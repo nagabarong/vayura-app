@@ -1,18 +1,22 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { Moon, Sun } from "lucide-react";
 type Props = { className?: string };
 
 export function ThemeSwitch({ className = "" }: Props) {
-  const { theme, setTheme } = useTheme();
-  const isDark = theme === "dark";
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <button
       role="switch"
       aria-checked={isDark}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      suppressHydrationWarning
       onClick={() => setTheme(isDark ? "light" : "dark")}
       className={className}
     >
@@ -26,7 +30,7 @@ export function ThemeSwitch({ className = "" }: Props) {
             isDark ? "translate-x-5 bg-gray-900 text-white" : "translate-x-0 bg-white text-black"
           }`}
         >
-          {isDark ? <Moon className="size-4" /> : <Sun className="size-4" />}
+          {mounted && (isDark ? <Moon className="size-4" /> : <Sun className="size-4" />)}
         </span>
       </span>
     </button>
